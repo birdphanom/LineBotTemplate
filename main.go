@@ -49,9 +49,20 @@ func callbackHandler(w http.ResponseWriter, r *http.Request) {
 		if event.Type == linebot.EventTypeMessage {
 			switch message := event.Message.(type) {
 			case *linebot.TextMessage:
-				if _, err = bot.ReplyMessage(event.ReplyToken, linebot.NewTextMessage(message.ID+":"+message.Text+" hi!")).Do(); err != nil {
+				switch inputMessage := message.Text{
+				case "balance":
+					if _, err = bot.ReplyMessage(event.ReplyToken, linebot.NewTextMessage("บชX292955X คงเหลือ 5000.00บ")).Do(); err != nil {
 					log.Print(err)
+				
+					}
+				
+				case "rewards":
+					if _, err = bot.ReplyMessage(event.ReplyToken, linebot.NewTextMessage("คะแนนคงเหลือของท่านมี 2,000คะแนน")).Do(); err != nil {
+					log.Print(err)
+				
+					}
 				}
+
 			}
 		}
 	}
